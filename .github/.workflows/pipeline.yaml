@@ -1,0 +1,33 @@
+name: Subapp Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-subapp:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+      - name: Checkout subapp code
+        uses: actions/checkout@v2
+
+  deploy-subapp:
+    needs: build-subapp
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+      - name: Checkout subapp code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Install Amplify CLI
+        run: npm install -g @aws-amplify/cli
+
+      - name: Authenticate with AWS
+        run: amplify configure --username ${{ secrets.AWS_AMPLIFY_USERNAME }} --password ${{ secrets.AWS_AMPLIFY_PASSWORD }}
+
+      - name: Deploy to AWS Amplify
+        run: amplify publish

@@ -16,7 +16,8 @@
   "license": "ISC",
   "dependencies": {
     "i18next-browser-languagedetector": "^7.2.0",
-    "react-i18next": "^14.1.0"
+    "react-i18next": "^14.1.0",
+    "react-router-dom": "^6.23.0"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",
@@ -30,6 +31,7 @@
     "@typescript-eslint/eslint-plugin": "^7.1.1",
     "@typescript-eslint/parser": "^7.1.1",
     "babel-jest": "^29.7.0",
+    "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^7.1.1",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.0",
