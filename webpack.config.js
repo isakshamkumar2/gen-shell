@@ -34,7 +34,7 @@ module.exports = {
       template: path.resolve(__dirname, './src/index.html'),
     }),
     new ModuleFederationPlugin({
-      name: 'Shell',
+      name: 'SubappOne',
       filename: 'remoteEntry.js',
       exposes: {
         './Shell': __dirname+'/src/App.tsx',
