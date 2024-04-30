@@ -11,8 +11,11 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './build'),
     filename: 'bundle.js',
+    publicPath: '/',
+
   },
   devServer: {
+    path: '/',
     historyApiFallback: {
       index: '/index.html',
     },
@@ -34,7 +37,7 @@ module.exports = {
       name: 'Shell',
       filename: 'remoteEntry.js',
       exposes: {
-        './Shell': './src/App.tsx',
+        './Shell': __dirname+'/src/App.tsx',
       },
     }),
   ],
