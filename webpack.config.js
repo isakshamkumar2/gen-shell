@@ -12,10 +12,10 @@ module.exports = {
     path: path.resolve(__dirname, './build'),
     filename: 'bundle.js',
     publicPath: '/',
-
   },
   devServer: {
     path: '/',
+
     historyApiFallback: {
       index: '/index.html',
     },
@@ -37,7 +37,16 @@ module.exports = {
       name: 'SubappOne',
       filename: 'remoteEntry.js',
       exposes: {
-        './Shell': __dirname+'/src/App.tsx',
+        // './Shell': __dirname+'/src/App.tsx',
+        './Shell': path.resolve(__dirname, './src/App.tsx'),
+        //the shell is not getting exposed properly
+        // "./Shell" : path.resolve(__dirname, './build/bundle.js',),
+        // "./Shell":'./build/App.tsx',
+        // "./Shell": './build/bundle.js',
+      },
+      shared: {
+        react: { singleton: true, eager: true },
+        'react-dom': { singleton: true, eager: true },
       },
     }),
   ],
