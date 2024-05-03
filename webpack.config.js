@@ -6,15 +6,20 @@ const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPl
 const webpack = require('webpack');
 const deps = require('./package.json').dependencies;
 module.exports = {
-  mode: 'production',
-  entry: path.resolve(__dirname, './src/index.tsx'),
+  mode: 'development',
+  entry: path.resolve(__dirname, './src/index.ts'),
   output: {
     path: path.resolve(__dirname, './build'),
     filename: 'bundle.js',
     publicPath: '/',
   },
+  stats: {
+    errorDetails: true,
+    children: true,
+  },
   devServer: {
-    path: '/',
+    // path: '/',
+    port: 3000,
 
     historyApiFallback: {
       index: '/index.html',
@@ -31,31 +36,42 @@ module.exports = {
       activeModules: true,
     }),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './src/index.html'),
+      template: path.resolve(__dirname, './public/index.html'),
     }),
     new ModuleFederationPlugin({
-      name: 'SubappOne',
+      name: 'Host',
       filename: 'remoteEntry.js',
-      exposes: {
-        // './Shell': __dirname+'/src/App.tsx',
-        './Shell': path.resolve(__dirname, './src/App.tsx'),
-        //the shell is not getting exposed properly
-        // "./Shell" : path.resolve(__dirname, './build/bundle.js',),
-        // "./Shell":'./build/App.tsx',
-        // "./Shell": './build/bundle.js',
+      remotes: {
+        SubappOne: 'SubappOne@http://localhost:3001/remoteEntry.js',
       },
       shared: {
-        react: { singleton: true, eager: true },
-        'react-dom': { singleton: true, eager: true },
+        react: { singleton: true },
+        'react-dom': { singleton: true },
       },
+      // shared: {
+      //   ...deps,
+      //   react: { singleton: true, eager: true },
+      //   "react-dom": {
+      //     singleton: true,
+      //     eager: true,
+
+      //   },
+      //   "react-router-dom": {
+      //     singleton: true,
+      //     eager: true,
+      //   },
+      // },
     }),
   ],
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
+        test: /\.(js|jsx|tsx|ts)$/,
+        loader: 'ts-loader',
         exclude: /node_modules/,
+        options: {
+          configFile: path.resolve(__dirname, 'tsconfig.json'),
+        },
       },
       {
         test: /\.css$/i,
