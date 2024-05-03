@@ -11,7 +11,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './build'),
     filename: 'bundle.js',
-    publicPath: '/',
+    publicPath: 'https://main.d2h8corz8vtc53.amplifyapp.com/',
   },
   stats: {
     errorDetails: true,
