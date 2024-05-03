@@ -30,7 +30,7 @@ module.exports = {
   },
 
   plugins: [
-    new CleanWebpackPlugin(),
+    // new CleanWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.ProgressPlugin({
       activeModules: true,
@@ -40,9 +40,10 @@ module.exports = {
     }),
     new ModuleFederationPlugin({
       name: 'Host',
-      filename: 'remoteEntry.js',
+      // filename: 'remoteEntry.js',
       remotes: {
-        SubappOne: 'SubappOne@https://main.d3asah4ucetr1l.amplifyapp.com/remoteEntry.js',
+        SubappOne:
+          'SubappOne@https://main.d3asah4ucetr1l.amplifyapp.com/remoteEntry.js',
       },
       shared: {
         react: { singleton: true },
