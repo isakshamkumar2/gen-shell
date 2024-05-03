@@ -42,7 +42,7 @@ module.exports = {
       name: 'Host',
       filename: 'remoteEntry.js',
       remotes: {
-        SubappOne: 'SubappOne@http://localhost:3001/remoteEntry.js',
+        SubappOne: 'SubappOne@https://main.d3asah4ucetr1l.amplifyapp.com/remoteEntry.js',
       },
       shared: {
         react: { singleton: true },
