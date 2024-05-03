@@ -5,6 +5,13 @@ type Props = {};
 
 const TopNavbar = (props: Props) => {
   const navigate = useNavigate();
+  const handleNavigate = () => {
+    if (window.location.pathname.includes('/cars')) {
+      window.location.href = '/subapp-2';
+    } else {
+      navigate('/subapp-2');
+    }
+  };
   return (
     <div
       style={{
@@ -22,10 +29,7 @@ const TopNavbar = (props: Props) => {
       </div>
 
       <div>
-        <button
-          onClick={() => navigate('/subapp-2')}
-          style={{ padding: '1rem' }}
-        >
+        <button onClick={handleNavigate} style={{ padding: '1rem' }}>
           Navigate to ChildSubAPP
         </button>
       </div>
